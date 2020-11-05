@@ -1,0 +1,17 @@
+version: '3' #versão do docker compose
+services: 
+    db: 
+        image: mongo:3.4 #Imagem ao qual eu vou referenciar meu container(service).Esse é o db do app.js
+    backend: 
+        image: node:8.1 #Imagem ao qual eu vou referenciar meu container(service)
+        volumes: 
+            - ./backend:/backend # "." pagina atual na pasta backend(onde está meu arquivo docker-compose) será referenciada por uma pasta que será criada chamada backend no meu container
+        ports:
+            - 3000:3000 #exponho a minha porta 3000 para a porta 3000 do container
+        command: bash -c "cd /backend && npm i && node app" #bash -c pra informar o comando que está entre "". Ao subir, isso é o que será executado
+    frontend:
+        image: nginx:1.13
+        volumes:
+            - ./frontend:/usr/share/nginx/html/ #Pasta onde ele irá buscar o arquivo do meu front end mapeado para o caminho descrito no container
+        ports: 
+            - 80:80
