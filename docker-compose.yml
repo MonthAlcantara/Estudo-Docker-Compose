@@ -8,7 +8,7 @@ services:
             - ./backend:/backend # "." pagina atual na pasta backend(onde está meu arquivo docker-compose) será referenciada por uma pasta que será criada chamada backend no meu container
         ports:
             - 3000:3000 #exponho a minha porta 3000 para a porta 3000 do container
-        command: bash -c "cd /backend && npm i && node app" #bash -c pra informar o comando que está entre "". Ao subir, isso é o que será executado
+        command: bash -c "cd /backend && npm i --no-bin-links && node app" #bash -c pra informar o comando que está entre "". Ao subir, isso é o que será executado
     frontend:
         image: nginx:1.13
         volumes:
